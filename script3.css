@@ -1,0 +1,66 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const itemInput = document.getElementById("itemInput");
+    const addItemBtn = document.getElementById("addItemBtn");
+    const shoppingList = document.getElementById("shoppingList");
+
+    // Function to create a list item
+    function createListItem(itemText) {
+        const li = document.createElement("li");
+
+        const span = document.createElement("span");
+        span.textContent = itemText;
+        li.appendChild(span);
+
+        // Edit button
+        const editBtn = document.createElement("button");
+        editBtn.textContent = "Edit";
+        editBtn.classList.add("edit-btn");
+        editBtn.addEventListener("click", () => editItem(li, span));
+        li.appendChild(editBtn);
+
+        // Delete button
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.addEventListener("click", () => deleteItem(li));
+        li.appendChild(deleteBtn);
+
+        shoppingList.appendChild(li);
+    }
+
+    // Function to add an item
+    function addItem() {
+        const itemText = itemInput.value.trim();
+        if (itemText === "") {
+            alert("Please enter an item!");
+            return;
+        }
+        createListItem(itemText);
+        itemInput.value = "";
+        itemInput.focus();
+    }
+
+    // Function to delete an item
+    function deleteItem(item) {
+        if (confirm("Are you sure you want to delete this item?")) {
+            shoppingList.removeChild(item);
+        }
+    }
+
+    // Function to edit an item
+    function editItem(item, span) {
+        const newText = prompt("Edit your item:", span.textContent);
+        if (newText !== null && newText.trim() !== "") {
+            span.textContent = newText.trim();
+        }
+    }
+
+    // Event listener for the "Add Item" button
+    addItemBtn.addEventListener("click", addItem);
+
+    // Event listener for Enter key
+    itemInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+            addItem();
+        }
+    });
+});
