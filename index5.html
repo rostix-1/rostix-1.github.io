@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map with Marker</title>
+  <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" defer></script>
+  <style>
+    #map {
+      height: 500px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Map with Marker</h1>
+  <div id="map"></div>
+  <script>
+    function initMap() {
+      // Центр карти: Вроцлав, Польща
+      const wroclawCoords = { lat: 51.1079, lng: 17.0385 };
+
+      // Ініціалізація карти
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: wroclawCoords,
+        zoom: 14,
+      });
+
+      // Додавання маркера
+      new google.maps.Marker({
+        position: wroclawCoords,
+        map: map,
+        title: "Wroclaw, Poland",
+      });
+    }
+  </script>
+</body>
+</html>
